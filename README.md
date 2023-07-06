@@ -80,9 +80,3 @@ Contributions to the Munchies recipe app are welcome! If you'd like to contribut
 Spoonacular - Food API provider.
 
 
-
-
-
-
-
-Regenerate response
