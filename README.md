@@ -1,180 +1,81 @@
-# The-Munchies-Recipe-App-Phase-1-project-
-const searchBtn = document.getElementById('search-btn');
-const searchInput = document.querySelector('input[type="text"]');
-const recipeContainer = document.getElementById('recipe-container');
-const perPage = 3; // Number of recipes to display per page
-let currentPage = 1; // Current page of results
+# Phase 1 project
 
-// Add event listener to search button
-searchBtn.addEventListener('click', searchRecipes);
+Munchies is a recipe app that allows users to search for recipes based on the ingredients they have and the amount of time they have available. Users can save their favorite recipes and share them with friends and family. The app utilizes Spoonacular's Food API to access a vast collection of recipes and food products.
 
-// Function to search for recipes
-function searchRecipes() {
-  const userInput = searchInput.value;
-  const apiKey = 'd40b55e0b55f4099b859b04b2533d17a';
-  const apiUrl = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${userInput}`;
+## Features
+Search for recipes based on ingredients, diet, and nutrients.
+Display recipe results with images and titles.
+View detailed recipe information, including preparation time, servings, ingredients, and instructions.
+Save recipes to a local storage for future reference.
+Download recipes as JSON files.
+Responsive design for optimal viewing on different devices.
 
-  fetch(apiUrl)
-    .then(response => response.json())
-    .then(data => {
-      const startIndex = (currentPage - 1) * perPage;
-      const endIndex = startIndex + perPage;
-      const recipes = data.results.slice(startIndex, endIndex);
-      displayRecipes(recipes);
-    })
-    .catch(error => {
-      console.log('Error:', error);
-    });
-}
+## Technologies Used
+HTML
+CSS
+JavaScript
+Getting Started
+To get a local copy of the Munchies recipe app up and running, follow these steps:
 
-// Function to display the recipe results on the page
-function displayRecipes(recipes) {
-  recipeContainer.innerHTML = '';
+### Clone the repository:
 
-  for (let i = 0; i < recipes.length; i++) {
-    const recipeCard = document.createElement('div');
-    recipeCard.classList.add('recipe-card');
-    recipeCard.innerHTML = `
-      <img src="${recipes[i].image}" alt="${recipes[i].title}" />
-      <h3>${recipes[i].title}</h3>
-    `;
+Copy code
+git clone https://github.com/your-username/munchies-recipe-app.git
+Open the project directory:
+Copy code
+cd munchies-recipe-app
+Launch the app:
+Open the index.html file in your preferred web browser.
+Start exploring recipes:
+Enter ingredients, dietary preferences, or other criteria in the search input.
+Click the "Search" button to retrieve matching recipes.
+Click on a recipe card to view detailed information.
+Use the pagination buttons to navigate through multiple pages of results.
+Dependencies
+The Munchies recipe app utilizes the following dependencies:
 
-    recipeCard.addEventListener('click', () => {
-      showRecipeDetails(recipes[i].id);
-    });
+Font Awesome: Icon library for social media icons.
+API Usage
+The app utilizes Spoonacular's Food API to search for recipes and retrieve recipe details. To use the app, an API key is required. Please follow these steps:
 
-    recipeContainer.appendChild(recipeCard);
-  }
-}
+Sign up for a Spoonacular API key at Spoonacular Developer Portal.
 
-// Function to show recipe details
-function showRecipeDetails(recipeId) {
-  const apiKey = 'd40b55e0b55f4099b859b04b2533d17a';
-  const apiUrl = `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${apiKey}`;
+Copy your API key.
 
-  fetch(apiUrl)
-    .then(response => response.json())
-    .then(data => {
-      const recipeImage = document.createElement('img');
-      recipeImage.src = data.image;
-      recipeImage.alt = data.title;
+In the JavaScript file script.js, replace 'YOUR_API_KEY' with your actual Spoonacular API key:
 
-      const recipeTitle = document.createElement('h3');
-      recipeTitle.textContent = data.title;
+javascript
+Copy code
+const apiKey = 'YOUR_API_KEY';
+Contributing
+Contributions to the Munchies recipe app are welcome! If you'd like to contribute, please follow these guidelines:
 
-      const recipeDetails = document.createElement('div');
-      recipeDetails.innerHTML = `
-        <h4>Ready in ${data.readyInMinutes} minutes</h4>
-        <p>Servings: ${data.servings}</p>
-        <h4>Ingredients:</h4>
-        <ul>
-          ${data.extendedIngredients.map(ingredient => `<li>${ingredient.original}</li>`).join('')}
-        </ul>
-        <h4>Method:</h4>
-        <ol>
-          ${data.analyzedInstructions[0].steps.map(step => `<li>${step.step}</li>`).join('')}
-        </ol>
-        <button class="download-btn">Download</button>
-      `;
+Fork the repository.
 
-      const downloadButton = recipeDetails.querySelector('.download-btn');
-      downloadButton.addEventListener('click', () => {
-        downloadRecipe(data);
-      });
+Create a new branch for your feature or bug fix.
 
-      recipeContainer.innerHTML = '';
-      recipeContainer.appendChild(recipeImage);
-      recipeContainer.appendChild(recipeTitle);
-      recipeContainer.appendChild(recipeDetails);
-    })
-    .catch(error => {
-      console.log('Error:', error);
-});
-}
+shell
+Copy code
+git checkout -b feature/your-feature-name
+Commit your changes.
+shell
+Copy code
+git commit -m "Add your commit message"
+Push your branch.
+shell
+Copy code
+git push origin feature/your-feature-name
+Submit a pull request.
+License
+The Munchies recipe app is licensed under the MIT License.
 
-// Function to handle pagination navigation
-function goToPage(page) {
-  currentPage = page;
-  searchRecipes();
-}
-
-// Function to save a recipe
-function saveRecipe(recipe) {
-  const savedRecipes = getSavedRecipes();
-  savedRecipes.push(recipe);
-  saveRecipesLocally(savedRecipes);
-  console.log('Recipe saved:', recipe);
-}
-
-// Function to get saved recipes from local storage
-function getSavedRecipes() {
-  const savedRecipesData = localStorage.getItem('savedRecipes');
-  if (savedRecipesData) {
-    return JSON.parse(savedRecipesData);
-  }
-  return [];
-}
-
-// Function to save recipes to local storage
-function saveRecipesLocally(savedRecipes) {
-  localStorage.setItem('savedRecipes', JSON.stringify(savedRecipes));
-}
-
-// Function to download a recipe as a JSON file
-function downloadRecipe(recipe) {
-  const recipeData = JSON.stringify(recipe);
-  const blob = new Blob([recipeData], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = `${recipe.title}.json`;
-  link.click();
-  URL.revokeObjectURL(url);
-}
-
-// Call the function to load saved recipes on page load
-loadSavedRecipes();
-
-const recipeForm = document.getElementById('recipe-form');
-
-// Add event listener to recipe form
-recipeForm.addEventListener('submit', (event) => {
-  event.preventDefault(); // Prevent form submission
-
-  // Get user input from the form inputs
-  const recipeInput = document.getElementById('recipe-input');
-  const instructionsInput = document.getElementById('instructions-input');
-  const title = titleInput.value;
-  const instructions = instructionsInput.value;
-
-  // Call the createRecipe function
-  createRecipe(title, instructions);
-});
-
-// Function to create a recipe
-function createRecipe(title, instructions) {
-  const apiKey = 'd40b55e0b55f4099b859b04b2533d17a'; 
-
-  const apiUrl = 'https://api.spoonacular.com/recipes/visualizeRecipe';
-  const formData = new FormData();
-  formData.append('title', title);
-  formData.append('instructions', instructions);
-  formData.append('apiKey', apiKey);
-
-  // Send a POST request to the API
-  fetch(apiUrl, {
-    method: 'POST',
-    body: formData,
-  })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Recipe created:', data);
-      // Handle the response and perform any necessary actions
-    })
-    .catch(error => {
-      console.log('Error:', error);
-      // Handle the error
-    });
-}
+Acknowledgements
+Spoonacular - Food API provider.
+Feel free to customize and expand this README file according to your specific project requirements and guidelines.
 
 
+
+
+
+
+Regenerate response
