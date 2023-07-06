@@ -36,13 +36,7 @@ function displayRecipes(recipes) {
     recipeCard.innerHTML = `
       <img src="${recipes[i].image}" alt="${recipes[i].title}" />
       <h3>${recipes[i].title}</h3>
-      <button class="save-btn">Save</button>
     `;
-
-    const saveButton = recipeCard.querySelector('.save-btn');
-    saveButton.addEventListener('click', () => {
-      saveRecipe(recipes[i]);
-    });
 
     recipeCard.addEventListener('click', () => {
       showRecipeDetails(recipes[i].id);
