@@ -7,46 +7,59 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    /* Your CSS styles here */
-  </style>
-</head>
-
-<body>
+ </head>
+    <body>
   <input type="checkbox" id="check">
+  <div id="image-background"></div>
 
   <header>
     <h2>Munchies Recipes</h2>
     <div class="navigation">
-      <a href="#">Home</a>
-      <a href="#">Create Recipe</a>
-      <a href="#">Contact</a>
+      <a href="#search-container">Home</a>
+      <a href="#recipe-form">Create Recipe</a>
+      <a href="#media-icons">Connect</a>
     </div>
     <label for="check">
       <i class="fas fa-bars menu-btn"></i>
       <i class="fas fa-times close-btn"></i>
     </label>
   </header>
-
+    <div id="introClass">
+     
+      <div class="intro">
+        <h3>Munchies</h3>
+        <p>Your culinary companion for inspired cooking!
+          Explore diverse cuisines, save and share 
+          your favorite recipes, and elevate your cooking experience. 
+          Get ready to ignite your creativity in the kitchen and embark 
+          on a delicious journey...</p>
+      </div>
+    </div>
+  
   <div id="content">
     <div class="search-container">
+
       <h3>Discover Your Perfect Dish!</h3>
-      <input type="text" placeholder="Type Ingredients, diet, nutrients...">
-      <button id="search-btn">Search</button>
+         <input type="text" placeholder="Type Ingredients, diet, nutrients...">
+        <button id="search-btn">Search</button>
+
       <div id="recipe-container"></div>
-      <button id="prev-page" class="prev-next-btn">Previous</button>
-      <button id="next-page" class="prev-next-btn">Next</button>
+
+        <h3>Create Your Recipe!</h3>
+      <form id="recipe-form">
+        <div class="item1"> 
+          <input type="text" placeholder="Create Recipe" id="title-input">
+        </div>
+       <div>
+          <button type="submit" id="create-btn">Submit</button>
+       </div>
+      </form>
 
     </div>
-    <div class="container-2">
-      <h3>Create Your Recipe</h3>
-      <form id="recipe-form">
-        <input type="text" placeholder="Recipe Title" id="title-input">
-        <textarea placeholder="Recipe Instructions" id="instructions-input"></textarea>
-        <button type="submit" id="create-btn">Create Recipe</button>
-      </form>
+      
     </div>  
-          
+      
+              
   <div class="media-icons">
     <a href="#"><i class="fab fa-facebook"></i></a>
     <a href="#"><i class="fab fa-twitter"></i></a>

@@ -36,6 +36,7 @@ function displayRecipes(recipes) {
     recipeCard.innerHTML = `
       <img src="${recipes[i].image}" alt="${recipes[i].title}" />
       <h3>${recipes[i].title}</h3>
+      
     `;
 
     recipeCard.addEventListener('click', () => {
@@ -176,3 +177,5 @@ function createRecipe(title, instructions) {
     });
 }
 
+
+    
