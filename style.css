@@ -61,8 +61,7 @@ header .navigation a:hover {
 }
 
 .content {
-  max-width: 650px;
-  margin: 60px 100px;
+  max-width: fit-content;
 }
 
 .search-container {
@@ -77,10 +76,10 @@ header .navigation a:hover {
 }
 
 .search-container input[type="text"] {
-  padding: 20px;
+  padding: 10px;
   font-size: 18px;
   margin-right: 8px;
-  width: 50%;
+  width: 100%;
   border: none;
   background: rgb(221, 216, 216);
   border-radius: 50px;
@@ -100,6 +99,16 @@ header .navigation a:hover {
 .search-container #search-btn:hover {
   background-color: rgba(209, 43, 21, 0.8);
 }
+
+.search-container #recipe-container{
+    display: flex;
+    justify-content: flex-start;  
+    flex-direction: row; 
+    background-color: #bbdefb;
+    height: 100%;
+    padding: 15px;
+    gap: 5px; 
+}    
 
 .media-icons {
   display: flex;
