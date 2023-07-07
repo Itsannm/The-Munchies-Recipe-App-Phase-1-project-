@@ -1,3 +1,6 @@
+ {
+  "start": "node your-start-file.js"
+}
 {
   "name": "the-munchies-recipe-app-phase-1-project-",
   "version": "1.0.0",
