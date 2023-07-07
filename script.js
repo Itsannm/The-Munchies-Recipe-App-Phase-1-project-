@@ -1,7 +1,7 @@
 const searchBtn = document.getElementById('search-btn');
 const searchInput = document.querySelector('input[type="text"]');
 const recipeContainer = document.getElementById('recipe-container');
-const perPage = 3; // Number of recipes to display per page
+const perPage = 6; // Number of recipes to display per page
 let currentPage = 1; // Current page of results
 
 // Add event listener to search button
