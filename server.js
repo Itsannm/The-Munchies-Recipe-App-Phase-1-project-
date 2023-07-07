@@ -4,7 +4,7 @@ const path = require('path');
 
 const server = http.createServer((req, res) => {
   // Determine the file path based on the requested URL
-  let filePath = path.join(__/'Development/Code/ann/The-Munchies-Recipe-App-Phase-1-project-', req.url === '/' ? 'index.html' : req.url);
+  let filePath = path.join('__/Development/Code/ann/The-Munchies-Recipe-App-Phase-1-project-', req.url === '/' ? 'index.html' : req.url);
 
   // Check if the requested file exists
   fs.access(filePath, fs.constants.F_OK, (err) => {
